@@ -1,13 +1,14 @@
 import { Container, Grid } from '@material-ui/core'
 import React from 'react'
+import { connect } from 'react-redux'
 import MediaCard from '../Cards/card'
 
-export const Body = ({ data }) => {
-    let books = data.items || []
-    console.log('render:', data.items)
+const Body = (props) => {
+    let books = props.items || []
+    console.log('render:', props.items)
     return (
         <Container>
-            <span>found {data.totalItems} mudaka</span>
+            <span>found {25} mudaka</span>
             <Grid container spacing={3}>
                 {books.map((item) => {
                     return (
@@ -20,3 +21,10 @@ export const Body = ({ data }) => {
         </Container>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        items: state.items,
+    }
+}
+export default connect(mapStateToProps)(Body)

@@ -1,23 +1,17 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Body } from './Components/Body/body'
+import Body from './Components/Body/body'
 import { Header } from './Components/Header/header'
+import { connect } from 'react-redux'
 
-function App() {
+function App(props) {
     let [data, setData] = useState([])
-    let [load, setLoad] = useState(false)
+
+    console.log('render ___', props)
 
     useEffect(() => {
-        async function moon() {
-            let data2 = await fetch(
-                'https://www.googleapis.com/books/v1/volumes?q=search-terms&key=AIzaSyDAELsd-BUUExjct5xTpUeAWZN9kaidr_8'
-            )
-
-            let d = await data2.json()
-            setData(d)
-        }
-        moon()
-    }, [])
+        setData(props.items)
+    })
     return (
         <div>
             <Header />
@@ -26,4 +20,10 @@ function App() {
     )
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        items: state.items,
+    }
+}
+
+export default connect(mapStateToProps)(App)
