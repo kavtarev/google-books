@@ -8,6 +8,7 @@ const useStyle = makeStyles({
     },
     selects: {
         padding: 50,
+        marginBottom: 10,
     },
 })
 
