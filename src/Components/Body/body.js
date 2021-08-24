@@ -1,6 +1,7 @@
 import { Container, Grid } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
+import { LoadBooksThunkCreator } from '../../redux/mainReducer'
 import MediaCard from '../Cards/card'
 
 const Body = (props) => {
@@ -8,7 +9,7 @@ const Body = (props) => {
     console.log('render:', props.items)
     return (
         <Container>
-            <span>found {25} mudaka</span>
+            <span>found {props.total} mudaka</span>
             <Grid container spacing={3}>
                 {books.map((item) => {
                     return (
@@ -25,6 +26,8 @@ const Body = (props) => {
 const mapStateToProps = (state) => {
     return {
         items: state.items,
+        total: state.total,
     }
 }
-export default connect(mapStateToProps)(Body)
+
+export default connect(mapStateToProps, { LoadBooksThunkCreator })(Body)
