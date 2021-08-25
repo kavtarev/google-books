@@ -1,9 +1,9 @@
 import { Container, TextField, InputAdornment, makeStyles, Grid } from '@material-ui/core'
-import { CallMissedSharp, Search } from '@material-ui/icons'
+import { Search } from '@material-ui/icons'
 import React from 'react'
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { LoadBooksThunkCreator } from '../../redux/mainReducer'
+import { LoadBooksThunkCreator, LoadMoreBooksThunkCreator } from '../../redux/mainReducer'
 const useStyle = makeStyles({
     selects: {
         display: 'flex',
@@ -12,6 +12,10 @@ const useStyle = makeStyles({
     },
     form: {
         marginBottom: 15,
+    },
+    btn: {
+        position: 'relative',
+        top: '100%',
     },
 })
 
@@ -33,9 +37,11 @@ const Header = (props) => {
         e.preventDefault()
         props.LoadBooksThunkCreator({ input, category, order })
     }
+
     return (
         <Container>
             <h1>Search for books</h1>
+
             <form className={style.form} onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
@@ -107,4 +113,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { LoadBooksThunkCreator })(Header)
+export default connect(mapStateToProps, { LoadBooksThunkCreator, LoadMoreBooksThunkCreator })(
+    Header
+)

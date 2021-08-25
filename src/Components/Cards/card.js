@@ -31,21 +31,22 @@ export default function MediaCard({ item }) {
                     <CardMedia
                         className={classes.media}
                         image={
-                            item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null
+                            item.volumeInfo && item.volumeInfo.imageLinks
+                                ? item.volumeInfo.imageLinks.thumbnail
+                                : null
                         }
-                        title='Contemplative Reptile'
                     />
                     <CardContent>
                         <Typography gutterBottom variant='h5' component='h2'>
-                            {item.volumeInfo.title}
+                            {item.volumeInfo ? item.volumeInfo.title : null}
                         </Typography>
                         <Typography gutterBottom variant='h6' component='h2' color='textSecondary'>
-                            {item.volumeInfo.categories
+                            {item.volumeInfo && item.volumeInfo.categories
                                 ? item.volumeInfo.categories[0]
                                 : 'not defined'}
                         </Typography>
                         <Typography variant='body2' color='textSecondary' component='p'>
-                            {item.volumeInfo.authors || null}
+                            {item.volumeInfo ? item.volumeInfo.authors : null}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
