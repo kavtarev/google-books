@@ -1,14 +1,20 @@
-import { Button, Container, Grid } from '@material-ui/core'
+import { Button, Container, Grid, makeStyles } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
 import { LoadMoreBooksThunkCreator } from '../../redux/mainReducer'
 import MediaCard from '../Cards/card'
+const useStyles = makeStyles({
+    btn: {
+        marginTop: 10,
+    },
+})
 
 const Body = (props) => {
-    console.log('render:', props.items)
+    const styles = useStyles()
     const handleLoad = () => {
         props.LoadMoreBooksThunkCreator()
     }
+
     return (
         <Container>
             {props.total && <span>found {props.total} items</span>}
@@ -21,7 +27,9 @@ const Body = (props) => {
                     )
                 })}
             </Grid>
-            <Button onClick={handleLoad}>Load More</Button>
+            <Button className={styles.btn} onClick={handleLoad}>
+                Load More
+            </Button>
         </Container>
     )
 }
